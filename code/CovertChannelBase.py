@@ -27,7 +27,7 @@ class CovertChannelBase:
         - You can use this function to log the received message and it is not a must, you can write your own.
         """
         with open(log_file_name, "w") as my_file:
-            my_file.write(message)
+          my_file.write(message)
     def convert_string_message_to_binary(self, message):
         """
         - Converts the incoming string value to binary format.
