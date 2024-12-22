@@ -11,9 +11,7 @@ class MyCovertChannel(CovertChannelBase):
     def __init__(self):
         # This array accumulates the messages for decoding.
         self.array = []
-        """
-        - You can edit __init__.
-        """
+        
         pass
     def send(self, log_file_name):
         # The below code generates the random message.
@@ -78,10 +76,6 @@ class MyCovertChannel(CovertChannelBase):
         return False
     
     def receive(self,  log_file_name):
-        """
-        - In this function, you are expected to receive and decode the transferred message. Because there are many types of covert channels, the receiver implementation depends on the chosen covert channel type, and you may not need to use the functions in CovertChannelBase.
-        - After the implementation, please rewrite this comment part to explain your code basically.
-        """
         
         # Read the packet, stop upon stop_func, filter on only sender and ntp packets and put packets in an array upon receiving.
         scapy.sniff(stop_filter = self.stop_func,filter = "host sender and port ntp" ,prn = lambda x: self.array.append(x))
