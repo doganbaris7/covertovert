@@ -6,8 +6,10 @@
 Covert Channel documentation
 ============================
 
-Please add your names, group ID, and your link to the forked public repository here by editing `index.rst` in the docs folder.
-
+Okan Saglam
+Baris Dogan
+Group41
+https://github.com/doganbaris7/covertovert
 
 .. toctree::
    :maxdepth: 2

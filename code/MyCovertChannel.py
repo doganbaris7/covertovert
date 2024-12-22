@@ -1,5 +1,6 @@
 from CovertChannelBase import CovertChannelBase
 import scapy.all as scapy
+import time
 
 class MyCovertChannel(CovertChannelBase):
     
@@ -13,13 +14,14 @@ class MyCovertChannel(CovertChannelBase):
         - You can edit __init__.
         """
         pass
-    def send(self, log_file_name, parameter1, parameter2):
+    def send(self, log_file_name):
         """
         - In this function, you expected to create a random message (using function/s in CovertChannelBase), and send it to the receiver container. Entire sending operations should be handled in this function.
         - After the implementation, please rewrite this comment part to explain your code basically.
         """
-        binary_message = self.generate_random_binary_message_with_logging(log_file_name)
+        binary_message = self.generate_random_binary_message_with_logging(log_file_name,min_length=16,max_length=16)
         index = 0
+        flag = True
         while True:
             for i in range(0,2):
                 message = binary_message[index + i*4 :index + i*4 +4]
@@ -45,10 +47,16 @@ class MyCovertChannel(CovertChannelBase):
                 disp = int(last_16,2)
                 disp = disp ^ delay
                 packet = scapy.IP(dst = "receiver")/scapy.UDP() / scapy.NTP(delay = delay,dispersion = disp)
+                if flag:
+                    t0 = time.time()
+                    flag = False
                 CovertChannelBase.send(self,packet)
             if binary_message[index:index+8] == "00101110":
+                t1 = time.time()
                 break
             index = index +8
+        
+        print(t1-t0)
         
         
             
@@ -59,7 +67,7 @@ class MyCovertChannel(CovertChannelBase):
             return True
         return False
     
-    def receive(self, parameter1, parameter2, parameter3, log_file_name):
+    def receive(self,  log_file_name):
         """
         - In this function, you are expected to receive and decode the transferred message. Because there are many types of covert channels, the receiver implementation depends on the chosen covert channel type, and you may not need to use the functions in CovertChannelBase.
         - After the implementation, please rewrite this comment part to explain your code basically.
@@ -106,9 +114,3 @@ class MyCovertChannel(CovertChannelBase):
         
         
         
-"""        
-random_delay = bin(random_delay)
-random_delay = random_delay[2:]
-random_delay = (16 - len(random_delay))* "0" + random_delay
-print(random_delay)
-"""
