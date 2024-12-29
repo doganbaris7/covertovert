@@ -1,6 +1,8 @@
 # COVERTOVERT
 Open source implementation of "network" covert channels.
 
+# Our explanation is under /code/README
+
 ## Installation
 
 Install docker (and optionally compose V2 plugin - not the docker-compose!) and VSCode on your sytstem. Run the docker containers as non-root users.
