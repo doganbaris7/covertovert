@@ -2,12 +2,12 @@
   "covert_channel_code": "CSC-PSV-NTP-RDP",
   "send": {
     "parameters": {
-      "log_file_name": "Example_UDPTimingInterarrivalChannelSender.log"
+      "log_file_name": "NTPRootDispersionFieldManipulationSender.log"
     }
   },
   "receive": {
     "parameters": {
-      "log_file_name": "Example_UDPTimingInterarrivalChannelReceiver.log"
+      "log_file_name": "NTPRootDispersionFieldManipulationReceiver.log"
     }
   }
 }

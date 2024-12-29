@@ -34,14 +34,19 @@ class MyCovertChannel(CovertChannelBase):
                 sum3 = int(message[3])
                 
                 #We are normalizing the sums to 4-bits
+                
+                #First convert sums to binary
                 sum0 = bin(sum0)
                 sum1 = bin(sum1)
                 sum2 = bin(sum2)
                 sum3 = bin(sum3)
+                # Then remove the "0b" part of the binary representation
                 sum0 = sum0[2:]
                 sum1 = sum1[2:]
                 sum2 = sum2[2:]
                 sum3 = sum3[2:]
+                
+                # Then add zeros to the left to make them 4-bits
                 sum0 = (4 - len(sum0))* "0" + sum0
                 sum1 = (4 - len(sum1))* "0" + sum1
                 sum2 = (4 - len(sum2))* "0" + sum2
@@ -60,6 +65,8 @@ class MyCovertChannel(CovertChannelBase):
             # In the below If statement, sender stops sending packets upon detecting "."
             if binary_message[index:index+8] == "00101110":
                 t1 = time.time()
+                print("Time taken to send the message: ", t1-t0)
+                print("Channel capacity is ", 128/(t1-t0))
                 break
             index = index +8
         
